@@ -184,10 +184,10 @@ nextStep board size =
 
 
 getCellStatusBasedOnAliveNeighbors : Array Cell -> Int -> Int -> Cell -> Cell
-getCellStatusBasedOnAliveNeighbors board size n cellStatus =
+getCellStatusBasedOnAliveNeighbors board size index cellStatus =
     let
         aliveNeighborsCount =
-            aliveNeighbors board size n
+            aliveNeighbors board size index
     in
     case aliveNeighborsCount of
         2 ->
@@ -201,35 +201,35 @@ getCellStatusBasedOnAliveNeighbors board size n cellStatus =
 
 
 aliveNeighbors : Array Cell -> Int -> Int -> Int
-aliveNeighbors board size n =
+aliveNeighbors board size index =
     List.length <|
         List.filter isMaybeAlive <|
             List.map (\neighborIndex -> Array.get neighborIndex board) <|
-                neighbors size n
+                neighbors size index
 
 
 neighbors : Int -> Int -> List Int
-neighbors size n =
-    List.map Tuple.second (List.filter Tuple.first (neighborIndexes size n))
+neighbors size index =
+    List.map Tuple.second (List.filter Tuple.first (neighborIndexes size index))
 
 
 neighborIndexes : Int -> Int -> List ( Bool, Int )
-neighborIndexes size n =
+neighborIndexes size index =
     let
         notLeft =
-            modBy size n /= 0
+            modBy size index /= 0
 
         notRight =
-            modBy size n /= size - 1
+            modBy size index /= size - 1
     in
-    [ ( notLeft, n - size - 1 )
-    , ( True, n - size )
-    , ( notRight, n - size + 1 )
-    , ( notLeft, n - 1 )
-    , ( notRight, n + 1 )
-    , ( notLeft, n + size - 1 )
-    , ( True, n + size )
-    , ( notRight, n + size + 1 )
+    [ ( notLeft, index - size - 1 )
+    , ( True, index - size )
+    , ( notRight, index - size + 1 )
+    , ( notLeft, index - 1 )
+    , ( notRight, index + 1 )
+    , ( notLeft, index + size - 1 )
+    , ( True, index + size )
+    , ( notRight, index + size + 1 )
     ]
 
 
