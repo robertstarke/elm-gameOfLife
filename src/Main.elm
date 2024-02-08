@@ -2,7 +2,6 @@ module Main exposing (Autoplay(..), Cell(..), Model, Msg(..), aliveNeighbors, ge
 
 import Array exposing (Array)
 import Browser
-import Debug exposing (toString)
 import Html exposing (Html, button, div, input, section, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
@@ -325,7 +324,7 @@ createCellHtml index cell =
 createCellDiv : Int -> String -> Html Msg
 createCellDiv index classText =
     div
-        [ id (toString index)
+        [ id (String.fromInt index)
         , class ("cell " ++ classText)
         , onClick (ToggleCell index)
         ]
