@@ -1,5 +1,5 @@
-# elm-gameOfLive
-Game of Live implementation using Elm language
+# elm-gameOfLife
+Game Of Life implementation using Elm language
 
 To build use the following command:
 elm make src/Main.src --output public/main.js --optimize
